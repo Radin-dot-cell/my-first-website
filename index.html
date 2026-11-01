@@ -1,0 +1,731 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101c2c">
+  <meta name="description" content="The English Society is a welcoming community for curious minds, confident speakers, and creative thinkers. Speak. Connect. Inspire.">
+  <title>THE ENGLISH SOCIETY — Speak. Connect. Inspire.</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600;1,700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://images.unsplash.com">
+  <style>
+    /* Foundations */
+    :root {
+      color-scheme: light;
+      --navy: #101c2c;
+      --cream: #f7f3ea;
+      --orange: #ff7043;
+      --sky: #b9ddf5;
+      --white: #fff;
+      --muted: #747b85;
+      --line: rgba(16, 28, 44, .14);
+      --serif: "Playfair Display", Georgia, serif;
+      --sans: "DM Sans", sans-serif;
+      --display: "Space Grotesk", sans-serif;
+      --content: 1240px;
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 90px; }
+    body { margin: 0; background: var(--cream); color: var(--navy); font-family: var(--sans); font-size: 15px; line-height: 1.65; -webkit-font-smoothing: antialiased; }
+    body.locked { overflow: hidden; }
+    img { display: block; max-width: 100%; }
+    a { color: inherit; text-decoration: none; }
+    button, input, select, textarea { font: inherit; }
+    button, a { -webkit-tap-highlight-color: transparent; }
+    button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible { outline: 3px solid var(--orange); outline-offset: 4px; }
+    ::selection { background: var(--orange); color: var(--navy); }
+    .container { width: min(var(--content), calc(100% - 64px)); margin-inline: auto; }
+    .eyebrow { display: inline-flex; align-items: center; gap: 10px; margin: 0 0 17px; color: var(--muted); font: 700 10px/1.3 var(--display); letter-spacing: 1.4px; text-transform: uppercase; }
+    .eyebrow::before { width: 22px; height: 2px; background: var(--orange); content: ""; }
+    .section-heading { max-width: 760px; margin: 0; font: 700 clamp(38px, 5.3vw, 70px)/1.02 var(--serif); letter-spacing: 0; }
+    .section-intro { max-width: 510px; margin: 18px 0 0; color: var(--muted); font-size: 15px; }
+    .section-top { display: flex; align-items: end; justify-content: space-between; gap: 32px; margin-bottom: 47px; }
+    .section-top .section-intro { max-width: 350px; margin: 0; }
+    .button { display: inline-flex; min-height: 51px; align-items: center; justify-content: center; gap: 11px; border: 1px solid transparent; border-radius: 3px; padding: 0 22px; cursor: pointer; font: 700 11px/1 var(--display); letter-spacing: .3px; transition: background .2s ease, color .2s ease, transform .2s ease, border-color .2s ease; }
+    .button:hover { transform: translateY(-2px); }
+    .button-primary { background: var(--orange); color: var(--navy); }
+    .button-primary:hover { background: #ff8661; }
+    .button-dark { background: var(--navy); color: var(--white); }
+    .button-dark:hover { background: #203653; }
+    .button-outline { border-color: rgba(16, 28, 44, .26); background: transparent; color: var(--navy); }
+    .button-outline:hover { border-color: var(--navy); background: var(--navy); color: var(--white); }
+    .button-arrow { font-size: 17px; transition: transform .2s ease; }
+    .button:hover .button-arrow { transform: translateX(3px); }
+    .reveal { opacity: 0; transform: translateY(20px); transition: opacity .65s ease, transform .65s cubic-bezier(.2,.7,.2,1); }
+    .reveal.is-visible { opacity: 1; transform: translateY(0); }
+    .skip-link { position: fixed; z-index: 1000; top: 8px; left: 8px; transform: translateY(-150%); background: var(--white); padding: 12px; }
+    .skip-link:focus { transform: translateY(0); }
+
+    /* Navigation */
+    .site-header { position: sticky; z-index: 50; top: 0; background: rgba(247, 243, 234, .96); border-bottom: 1px solid rgba(16, 28, 44, .09); backdrop-filter: blur(12px); }
+    .nav-wrap { display: flex; min-height: 78px; align-items: center; justify-content: space-between; gap: 26px; }
+    .brand { display: inline-flex; flex: 0 0 auto; align-items: center; gap: 11px; }
+    .brand-mark { display: grid; width: 39px; height: 39px; place-items: center; border-radius: 50% 50% 50% 12%; background: var(--navy); color: var(--cream); font: 700 20px/1 var(--serif); }
+    .brand-name { font: 700 11px/1.2 var(--display); letter-spacing: 1.1px; }
+    .brand-name span { display: block; margin-top: 4px; color: var(--muted); font-size: 8px; letter-spacing: 1.7px; }
+    .nav-links { display: flex; align-items: center; gap: clamp(13px, 2vw, 27px); }
+    .nav-links a:not(.button) { position: relative; color: #444c56; font-size: 11px; font-weight: 600; transition: color .2s ease; }
+    .nav-links a:not(.button)::after { position: absolute; right: 0; bottom: -7px; left: 0; height: 1px; transform: scaleX(0); transform-origin: left; background: var(--orange); content: ""; transition: transform .2s ease; }
+    .nav-links a:not(.button):hover, .nav-links a.active { color: var(--navy); }
+    .nav-links a:not(.button):hover::after, .nav-links a.active::after { transform: scaleX(1); }
+    .nav-join { min-height: 42px; padding-inline: 16px; }
+    .menu-toggle { display: none; width: 42px; height: 42px; align-items: center; justify-content: center; border: 1px solid var(--line); background: transparent; color: var(--navy); cursor: pointer; }
+    .menu-toggle span, .menu-toggle span::before, .menu-toggle span::after { display: block; width: 18px; height: 2px; background: currentColor; transition: transform .2s ease; }
+    .menu-toggle span { position: relative; }
+    .menu-toggle span::before, .menu-toggle span::after { position: absolute; left: 0; content: ""; }
+    .menu-toggle span::before { top: -6px; }
+    .menu-toggle span::after { top: 6px; }
+    .menu-toggle[aria-expanded="true"] span { background: transparent; }
+    .menu-toggle[aria-expanded="true"] span::before { top: 0; transform: rotate(45deg); }
+    .menu-toggle[aria-expanded="true"] span::after { top: 0; transform: rotate(-45deg); }
+
+    /* Hero */
+    .hero { position: relative; overflow: hidden; padding: 62px 0 0; }
+    .hero-grid { display: grid; min-height: 526px; grid-template-columns: 1.03fr .97fr; align-items: center; gap: 28px; }
+    .hero-copy { position: relative; z-index: 2; padding: 18px 0 45px; }
+    .hero-kicker { color: var(--muted); font: 700 10px/1.3 var(--display); letter-spacing: 2px; }
+    .hero-kicker::before { display: inline-block; width: 25px; height: 2px; margin: 0 9px 3px 0; background: var(--orange); content: ""; }
+    .hero h1 { margin: 22px 0 17px; font: 800 clamp(66px, 8.5vw, 116px)/.82 var(--serif); letter-spacing: 0; }
+    .hero h1 span { display: block; }
+    .hero h1 .voice { position: relative; z-index: 0; width: max-content; color: var(--orange); font-style: italic; }
+    .hero h1 .voice::after { position: absolute; z-index: -1; right: -14px; bottom: 3px; left: -9px; height: 24%; transform: rotate(-2deg); background: var(--sky); content: ""; }
+    .hero h1 .world { display: flex; align-items: center; gap: 13px; }
+    .hero h1 .world::after { display: inline-grid; width: clamp(33px, 5vw, 57px); aspect-ratio: 1; place-items: center; border: 1px solid rgba(16, 28, 44, .32); border-radius: 50%; color: var(--navy); content: "↗"; font: 400 clamp(18px, 2.4vw, 28px)/1 var(--sans); }
+    .hero-description { max-width: 430px; margin: 25px 0 23px; color: #545d68; font-size: 14px; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 11px; }
+    .hero-note { display: inline-flex; align-items: center; gap: 8px; margin-top: 21px; color: var(--muted); font: 600 10px/1.3 var(--display); }
+    .hero-note strong { color: var(--navy); }
+    .hero-note .note-dot { width: 7px; height: 7px; border-radius: 50%; background: #62a57d; box-shadow: 0 0 0 4px rgba(98,165,125,.15); }
+    .hero-art { position: relative; min-height: 474px; align-self: stretch; }
+    .hero-photo { position: absolute; inset: 12px 0 24px 37px; overflow: hidden; border-radius: 46% 46% 4px 4px; background: var(--sky); }
+    .hero-photo img { width: 100%; height: 100%; object-fit: cover; object-position: center; }
+    .hero-photo::after { position: absolute; inset: 45% 0 0; background: linear-gradient(transparent, rgba(16,28,44,.3)); content: ""; }
+    .bubble { position: absolute; z-index: 2; display: grid; place-items: center; border-radius: 50%; font: 700 10px/1 var(--display); letter-spacing: .6px; }
+    .bubble-hello { top: 28px; left: 2px; width: 86px; height: 86px; transform: rotate(-9deg); background: var(--orange); color: var(--navy); }
+    .bubble-ideas { top: 135px; right: -18px; width: 79px; height: 79px; transform: rotate(8deg); background: var(--white); color: var(--navy); box-shadow: 0 9px 30px rgba(16,28,44,.12); }
+    .bubble-create { bottom: 72px; left: -7px; width: 73px; height: 73px; transform: rotate(8deg); background: var(--sky); color: var(--navy); }
+    .image-caption { position: absolute; z-index: 2; right: 18px; bottom: 42px; color: var(--white); font: 700 9px/1.3 var(--display); letter-spacing: 1.5px; }
+    .image-caption span { display: block; margin-top: 5px; font: 500 10px/1.3 var(--sans); letter-spacing: 0; }
+    .hero-stats { display: grid; min-height: 91px; grid-template-columns: repeat(3, 1fr); align-items: center; border-top: 1px solid var(--line); }
+    .stat { display: flex; align-items: baseline; justify-content: center; gap: 9px; }
+    .stat strong { font: 700 26px/1 var(--display); }
+    .stat span { color: var(--muted); font-size: 11px; }
+    .stat:nth-child(2) { border-inline: 1px solid var(--line); }
+    .stat-word { color: var(--orange) !important; font-size: 19px !important; }
+
+    /* About */
+    .about { padding: 111px 0 112px; background: var(--white); }
+    .about-layout { display: grid; grid-template-columns: 1fr .85fr; align-items: end; gap: 55px; margin-bottom: 50px; }
+    .about-layout .section-heading { max-width: 650px; }
+    .about-layout .section-intro { max-width: 450px; margin-bottom: 5px; }
+    .feature-grid { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--line); }
+    .feature { min-height: 218px; padding: 25px 25px 16px 0; }
+    .feature + .feature { border-left: 1px solid var(--line); padding-left: 25px; }
+    .feature-icon { display: grid; width: 44px; height: 44px; place-items: center; border-radius: 50%; background: var(--cream); font-size: 20px; }
+    .feature:nth-child(2) .feature-icon { background: var(--sky); }
+    .feature:nth-child(3) .feature-icon { background: #ffe2d8; }
+    .feature h3 { margin: 18px 0 7px; font: 700 24px/1.1 var(--serif); }
+    .feature p { max-width: 285px; margin: 0; color: var(--muted); font-size: 13px; }
+
+    /* Activities */
+    .activities { padding: 110px 0 116px; }
+    .activity-grid { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--line); border-left: 1px solid var(--line); }
+    .activity-card { position: relative; min-height: 208px; padding: 25px 24px 22px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); transition: background .25s ease, transform .25s ease; }
+    .activity-card:hover { z-index: 1; transform: translateY(-4px); background: var(--white); }
+    .activity-card .activity-icon { display: grid; width: 40px; height: 40px; place-items: center; border: 1px solid var(--line); border-radius: 50%; font-size: 18px; transition: transform .25s ease, background .25s ease; }
+    .activity-card:hover .activity-icon { transform: rotate(-9deg); background: var(--sky); }
+    .activity-card h3 { margin: 20px 0 7px; font: 700 22px/1.15 var(--serif); }
+    .activity-card p { max-width: 305px; margin: 0; color: var(--muted); font-size: 12px; }
+    .activity-number { position: absolute; top: 31px; right: 24px; color: #a4a8ae; font: 600 9px/1 var(--display); }
+
+    /* Events */
+    .events { padding: 108px 0 114px; background: var(--navy); color: var(--white); }
+    .events .eyebrow { color: #b5bdc7; }
+    .events .section-intro { color: #b5bdc7; }
+    .events .section-top .section-intro { max-width: 290px; }
+    .event-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 17px; }
+    .event-card { overflow: hidden; background: #1a2a3e; }
+    .event-cover { position: relative; height: 205px; overflow: hidden; background: #2d4056; }
+    .event-cover img { width: 100%; height: 100%; object-fit: cover; transition: transform .45s ease; }
+    .event-card:hover .event-cover img { transform: scale(1.045); }
+    .event-cover::after { position: absolute; inset: 40% 0 0; background: linear-gradient(transparent, rgba(16,28,44,.53)); content: ""; }
+    .event-date { position: absolute; z-index: 1; top: 13px; left: 13px; display: grid; width: 49px; height: 53px; place-content: center; background: var(--cream); color: var(--navy); text-align: center; }
+    .event-date strong { font: 700 19px/.95 var(--display); }
+    .event-date span { margin-top: 4px; font: 700 8px/1 var(--display); letter-spacing: .8px; text-transform: uppercase; }
+    .event-cover-label { position: absolute; z-index: 1; right: 16px; bottom: 12px; left: 16px; color: var(--white); font: 700 9px/1.2 var(--display); letter-spacing: 1.1px; }
+    .event-body { padding: 20px 20px 18px; }
+    .event-body h3 { margin: 0 0 9px; font: 700 24px/1.1 var(--serif); }
+    .event-meta { display: flex; flex-wrap: wrap; gap: 10px 15px; color: #c1c9d2; font-size: 10px; }
+    .event-meta span { display: inline-flex; align-items: center; gap: 5px; }
+    .event-body p { min-height: 45px; margin: 14px 0 17px; color: #bdc5ce; font-size: 12px; }
+    .event-action { display: inline-flex; align-items: center; gap: 8px; border: 0; border-bottom: 1px solid rgba(255,255,255,.45); padding: 0 0 5px; background: transparent; color: var(--white); cursor: pointer; font: 700 10px/1.2 var(--display); }
+    .event-action:hover { border-color: var(--orange); color: var(--orange); }
+    .editable-note { margin: 19px 0 0; color: #aeb8c4; font-size: 10px; }
+
+    /* Membership */
+    .membership { position: relative; overflow: hidden; padding: 110px 0; background: var(--sky); }
+    .membership::after { position: absolute; top: -105px; right: -80px; width: 380px; height: 380px; border: 1px solid rgba(16,28,44,.15); border-radius: 50%; box-shadow: 0 0 0 36px rgba(16,28,44,.035), 0 0 0 74px rgba(16,28,44,.025); content: ""; }
+    .membership-layout { position: relative; z-index: 1; display: grid; grid-template-columns: .95fr 1.05fr; align-items: center; gap: 65px; }
+    .membership .section-heading { max-width: 580px; }
+    .membership .section-intro { max-width: 430px; }
+    .benefit-list { display: grid; grid-template-columns: 1fr 1fr; gap: 0 21px; margin: 4px 0 26px; padding: 0; list-style: none; }
+    .benefit-list li { display: flex; align-items: flex-start; gap: 10px; border-bottom: 1px solid rgba(16,28,44,.16); padding: 14px 0; font-size: 12px; font-weight: 600; }
+    .benefit-list li::before { flex: 0 0 auto; color: #287348; content: "✓"; font: 700 15px/1 var(--display); }
+
+    /* Team */
+    .team { padding: 110px 0 115px; background: var(--white); }
+    .team-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 27px 19px; }
+    .team-card { min-width: 0; }
+    .team-photo { position: relative; overflow: hidden; aspect-ratio: 1.18 / 1; background: var(--cream); }
+    .team-photo img { width: 100%; height: 100%; object-fit: cover; filter: saturate(.82); transition: transform .45s ease, filter .3s ease; }
+    .team-card:hover .team-photo img { transform: scale(1.04); filter: saturate(1); }
+    .team-role { position: absolute; right: 10px; bottom: 10px; background: var(--cream); padding: 7px 9px; color: var(--navy); font: 700 8px/1.2 var(--display); letter-spacing: .7px; text-transform: uppercase; }
+    .team-info { padding: 13px 1px 0; }
+    .team-info h3 { margin: 0; font: 700 21px/1.2 var(--serif); }
+    .team-info p { margin: 5px 0 0; color: var(--muted); font-size: 11px; }
+    .team-placeholder-note { margin: 27px 0 0; color: var(--muted); font-size: 10px; }
+
+    /* Gallery */
+    .gallery { padding: 107px 0 113px; }
+    .gallery-grid { display: grid; grid-template-columns: 1.1fr .85fr .85fr; grid-template-rows: 190px 190px; gap: 12px; }
+    .gallery-item { position: relative; overflow: hidden; min-width: 0; border: 0; padding: 0; background: #d3dce2; cursor: zoom-in; text-align: left; }
+    .gallery-item:first-child { grid-row: span 2; }
+    .gallery-item:nth-child(4) { grid-column: 2 / 4; }
+    .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: transform .5s ease; }
+    .gallery-item:hover img { transform: scale(1.055); }
+    .gallery-caption { position: absolute; right: 0; bottom: 0; left: 0; padding: 37px 15px 12px; background: linear-gradient(transparent, rgba(16,28,44,.76)); color: var(--white); font: 600 10px/1.3 var(--display); letter-spacing: .4px; }
+
+    /* Testimonials */
+    .testimonials { padding: 103px 0 107px; background: #f0ece3; }
+    .testimonials .section-top { margin-bottom: 37px; }
+    .testimonials .section-top .section-intro { max-width: 340px; }
+    .quote-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 13px; }
+    .quote-card { min-height: 221px; padding: 24px 22px; background: var(--white); }
+    .quote-mark { color: var(--orange); font: 700 39px/.75 var(--serif); }
+    .quote-card blockquote { margin: 14px 0 21px; font: 600 18px/1.4 var(--serif); }
+    .quote-person { display: flex; align-items: center; gap: 10px; }
+    .quote-avatar { display: grid; width: 34px; height: 34px; place-items: center; border-radius: 50%; background: var(--sky); font: 700 11px/1 var(--display); }
+    .quote-card:nth-child(2) .quote-avatar { background: #ffe2d8; }
+    .quote-card:nth-child(3) .quote-avatar { background: #e7e5d7; }
+    .quote-person strong { display: block; font: 700 10px/1.4 var(--display); }
+    .quote-person span { display: block; color: var(--muted); font-size: 9px; }
+    .sample-label { margin: 20px 0 0; color: var(--muted); font-size: 10px; }
+
+    /* Contact */
+    .contact { padding: 111px 0 112px; background: var(--white); }
+    .contact-layout { display: grid; grid-template-columns: .8fr 1.2fr; gap: 76px; }
+    .contact-title { max-width: 460px; }
+    .contact-info { margin-top: 36px; }
+    .contact-row { display: grid; grid-template-columns: 100px 1fr; gap: 12px; border-top: 1px solid var(--line); padding: 13px 0; }
+    .contact-row:last-child { border-bottom: 1px solid var(--line); }
+    .contact-row dt { color: var(--muted); font: 700 9px/1.5 var(--display); letter-spacing: .6px; text-transform: uppercase; }
+    .contact-row dd { margin: 0; font-size: 12px; }
+    .contact-row a { text-decoration: underline; text-decoration-color: rgba(16,28,44,.25); text-underline-offset: 3px; }
+    .contact-form { display: grid; grid-template-columns: 1fr 1fr; gap: 17px 15px; align-content: start; }
+    .field { display: grid; gap: 6px; }
+    .field-full { grid-column: 1 / -1; }
+    .field label { font: 700 9px/1.4 var(--display); letter-spacing: .6px; text-transform: uppercase; }
+    .field input, .field select, .field textarea { width: 100%; border: 1px solid rgba(16,28,44,.2); border-radius: 0; padding: 12px 13px; background: var(--cream); color: var(--navy); font-size: 12px; }
+    .field input, .field select { min-height: 46px; }
+    .field textarea { min-height: 117px; resize: vertical; }
+    .field input::placeholder, .field textarea::placeholder { color: #868d95; }
+    .form-bottom { display: flex; grid-column: 1 / -1; flex-wrap: wrap; align-items: center; gap: 14px; }
+    .form-note { max-width: 340px; margin: 0; color: var(--muted); font-size: 10px; }
+    .form-status { min-height: 20px; grid-column: 1 / -1; margin: 0; color: #285d3b; font-size: 11px; }
+    .form-status:empty { display: none; }
+
+    /* Footer and overlays */
+    .footer { padding: 61px 0 24px; background: var(--navy); color: var(--white); }
+    .footer-main { display: grid; grid-template-columns: 1.2fr .8fr .9fr; gap: 55px; padding-bottom: 42px; }
+    .footer .brand-mark { background: var(--orange); color: var(--navy); }
+    .footer .brand-name span { color: #bbc3cc; }
+    .footer-about { max-width: 330px; margin: 19px 0 0; color: #bbc3cc; font-size: 12px; }
+    .footer-tagline { margin: 17px 0 0; color: var(--orange); font: 700 9px/1.4 var(--display); letter-spacing: 1.2px; }
+    .footer-col h2 { margin: 3px 0 16px; font: 700 10px/1.2 var(--display); letter-spacing: 1.2px; text-transform: uppercase; }
+    .footer-links { display: grid; grid-template-columns: 1fr 1fr; gap: 9px 17px; }
+    .footer-links a, .footer-contact a, .footer-contact p { color: #c2c9d0; font-size: 11px; }
+    .footer-links a:hover, .footer-contact a:hover { color: var(--orange); }
+    .footer-contact p { margin: 0 0 8px; }
+    .social-links { display: flex; gap: 9px; margin-top: 17px; }
+    .social-links a { display: grid; width: 34px; height: 34px; place-items: center; border: 1px solid rgba(255,255,255,.3); border-radius: 50%; font: 700 10px/1 var(--display); transition: background .2s ease, color .2s ease; }
+    .social-links a:hover { background: var(--orange); color: var(--navy); }
+    .footer-bottom { display: flex; justify-content: space-between; gap: 20px; border-top: 1px solid rgba(255,255,255,.16); padding-top: 18px; color: #aab4bf; font-size: 9px; }
+    .back-to-top { position: fixed; z-index: 40; right: 20px; bottom: 20px; display: grid; width: 43px; height: 43px; place-items: center; transform: translateY(12px); border: 0; background: var(--orange); color: var(--navy); cursor: pointer; font-size: 20px; opacity: 0; pointer-events: none; transition: opacity .2s ease, transform .2s ease; }
+    .back-to-top.visible { transform: translateY(0); opacity: 1; pointer-events: auto; }
+    .lightbox, .event-dialog { position: fixed; z-index: 100; inset: 0; display: grid; place-items: center; padding: 24px; background: rgba(7,14,24,.88); opacity: 0; pointer-events: none; transition: opacity .2s ease; }
+    .lightbox.open, .event-dialog.open { opacity: 1; pointer-events: auto; }
+    .lightbox figure { position: relative; max-width: min(100%, 980px); max-height: 90vh; margin: 0; }
+    .lightbox img { max-width: 100%; max-height: 80vh; object-fit: contain; }
+    .lightbox figcaption { padding-top: 11px; color: var(--white); font-size: 12px; }
+    .overlay-close { position: absolute; top: 0; right: 0; display: grid; width: 42px; height: 42px; place-items: center; border: 1px solid rgba(255,255,255,.45); background: var(--navy); color: var(--white); cursor: pointer; font-size: 23px; }
+    .lightbox .overlay-close { top: -52px; }
+    .dialog-panel { position: relative; width: min(100%, 470px); transform: translateY(10px); background: var(--cream); padding: 34px; transition: transform .2s ease; }
+    .event-dialog.open .dialog-panel { transform: translateY(0); }
+    .dialog-panel .overlay-close { top: 13px; right: 13px; border-color: var(--line); background: transparent; color: var(--navy); }
+    .dialog-panel h2 { margin: 0 35px 9px 0; font: 700 35px/1.1 var(--serif); }
+    .dialog-panel p { color: var(--muted); font-size: 13px; }
+    .dialog-details { margin: 19px 0 22px; border-block: 1px solid var(--line); padding: 13px 0; font-size: 11px; }
+    .dialog-note { margin: 14px 0 0; font-size: 10px !important; }
+    [hidden] { display: none !important; }
+
+    /* Responsive layouts */
+    @media (max-width: 980px) {
+      .container { width: min(var(--content), calc(100% - 44px)); }
+      .nav-links { gap: 13px; }
+      .nav-links a:not(.button) { font-size: 10px; }
+      .brand-name { font-size: 10px; }
+      .hero-grid { min-height: 490px; }
+      .hero-art { min-height: 430px; }
+      .section-top { align-items: start; flex-direction: column; gap: 14px; }
+      .events .section-top .section-intro, .testimonials .section-top .section-intro { max-width: 450px; }
+      .membership-layout { gap: 38px; }
+      .contact-layout { gap: 43px; }
+    }
+    @media (max-width: 760px) {
+      html { scroll-padding-top: 72px; }
+      .container { width: calc(100% - 38px); }
+      .nav-wrap { min-height: 68px; }
+      .menu-toggle { display: flex; margin-left: auto; }
+      .nav-links { position: absolute; top: 67px; right: 0; left: 0; display: none; align-items: stretch; flex-direction: column; gap: 0; border-bottom: 1px solid var(--line); padding: 8px 19px 20px; background: var(--cream); box-shadow: 0 14px 20px rgba(16,28,44,.08); }
+      .nav-links.open { display: flex; }
+      .nav-links a:not(.button) { padding: 12px 0; font-size: 13px; }
+      .nav-links a:not(.button)::after { display: none; }
+      .nav-join { align-self: flex-start; margin-top: 7px; }
+      .hero { padding-top: 42px; }
+      .hero-grid { min-height: 0; grid-template-columns: 1fr; gap: 0; }
+      .hero-copy { padding: 12px 0 24px; }
+      .hero h1 { font-size: clamp(69px, 14vw, 104px); }
+      .hero-description { max-width: 500px; }
+      .hero-art { width: min(100%, 490px); min-height: 400px; margin: 0 auto; }
+      .hero-photo { inset: 10px 24px 21px 38px; }
+      .bubble-ideas { right: 0; }
+      .hero-stats { min-height: 82px; }
+      .stat { gap: 5px; }
+      .stat strong { font-size: 21px; }
+      .stat span { font-size: 9px; }
+      .about, .activities, .events, .team, .gallery, .contact { padding-block: 77px; }
+      .about-layout { grid-template-columns: 1fr; gap: 9px; margin-bottom: 34px; }
+      .about-layout .section-intro { max-width: 540px; }
+      .feature-grid { grid-template-columns: 1fr; }
+      .feature { min-height: 0; padding: 20px 4px 20px 0; }
+      .feature + .feature { border-top: 1px solid var(--line); border-left: 0; padding-left: 0; }
+      .feature-icon { float: right; }
+      .feature h3 { margin-top: 5px; }
+      .feature p { max-width: 420px; }
+      .activity-grid { grid-template-columns: repeat(2, 1fr); }
+      .activity-card { min-height: 200px; padding: 20px 17px; }
+      .activity-card h3 { font-size: 20px; }
+      .activity-number { top: 25px; right: 17px; }
+      .event-grid { grid-template-columns: repeat(2, 1fr); }
+      .event-cover { height: 175px; }
+      .event-body { padding: 17px 15px; }
+      .event-body h3 { font-size: 21px; }
+      .membership { padding: 78px 0; }
+      .membership-layout { grid-template-columns: 1fr; gap: 27px; }
+      .team-grid { grid-template-columns: repeat(2, 1fr); gap: 22px 13px; }
+      .team-info h3 { font-size: 19px; }
+      .gallery-grid { grid-template-rows: 155px 155px; gap: 8px; }
+      .quote-grid { grid-template-columns: 1fr; }
+      .quote-card { min-height: 0; }
+      .contact-layout { grid-template-columns: 1fr; gap: 37px; }
+      .contact-info { max-width: 500px; margin-top: 25px; }
+      .footer-main { grid-template-columns: 1fr 1fr; gap: 34px 25px; }
+      .footer-brand-col { grid-column: 1 / -1; }
+    }
+    @media (max-width: 480px) {
+      .container { width: calc(100% - 32px); }
+      .hero h1 { font-size: clamp(64px, 16.3vw, 82px); }
+      .hero-art { min-height: 345px; }
+      .bubble-hello { width: 69px; height: 69px; font-size: 9px; }
+      .bubble-ideas { width: 65px; height: 65px; font-size: 9px; }
+      .bubble-create { width: 62px; height: 62px; font-size: 9px; }
+      .hero-stats { min-height: 73px; }
+      .stat { flex-direction: column; align-items: center; gap: 4px; }
+      .stat strong { font-size: 18px; }
+      .stat span { font-size: 8px; }
+      .stat-word { font-size: 13px !important; }
+      .section-heading { font-size: 40px; }
+      .activity-card { min-height: 190px; padding: 17px 13px; }
+      .activity-card h3 { margin-top: 15px; font-size: 18px; }
+      .activity-card p { font-size: 11px; }
+      .activity-number { top: 22px; right: 12px; font-size: 8px; }
+      .event-grid { grid-template-columns: 1fr; }
+      .event-cover { height: 205px; }
+      .event-body p { min-height: 0; }
+      .benefit-list { grid-template-columns: 1fr; }
+      .team-grid { gap: 20px 10px; }
+      .team-photo { aspect-ratio: .95 / 1; }
+      .team-role { right: 6px; bottom: 6px; padding: 6px; font-size: 7px; }
+      .team-info h3 { font-size: 17px; }
+      .team-info p { font-size: 10px; }
+      .gallery-grid { grid-template-columns: 1fr 1fr; grid-template-rows: 150px 125px 125px; }
+      .gallery-item:first-child { grid-row: span 2; }
+      .gallery-item:nth-child(4) { grid-column: auto; }
+      .gallery-item:nth-child(5) { grid-column: 1 / -1; }
+      .contact-form { grid-template-columns: 1fr; }
+      .field-full, .form-bottom, .form-status { grid-column: 1; }
+      .contact-row { grid-template-columns: 85px 1fr; }
+      .footer-main { grid-template-columns: 1fr; gap: 27px; }
+      .footer-brand-col { grid-column: auto; }
+      .footer-bottom { flex-direction: column; gap: 5px; }
+      .dialog-panel { padding: 27px 22px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+      .reveal { opacity: 1; transform: none; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <!-- Navigation -->
+  <header class="site-header">
+    <nav class="container nav-wrap" aria-label="Main navigation">
+      <a class="brand" href="#home" aria-label="The English Society home">
+        <span class="brand-mark" aria-hidden="true">E</span>
+        <span class="brand-name">THE ENGLISH SOCIETY<span>SPEAK · CONNECT · INSPIRE</span></span>
+      </a>
+      <button class="menu-toggle" type="button" aria-label="Open navigation menu" aria-expanded="false" aria-controls="nav-links"><span></span></button>
+      <div class="nav-links" id="nav-links">
+        <a href="#home">Home</a><a href="#about">About</a><a href="#activities">Activities</a><a href="#events">Events</a><a href="#team">Team</a><a href="#gallery">Gallery</a><a href="#contact">Contact</a>
+        <a class="button button-primary nav-join" href="#contact">Join the Club <span class="button-arrow" aria-hidden="true">↗</span></a>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main">
+    <!-- Hero -->
+    <section class="hero" id="home" aria-labelledby="hero-title">
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <div class="hero-kicker">YOUR VOICE. YOUR COMMUNITY.</div>
+          <h1 id="hero-title"><span>FIND YOUR</span><span class="voice">VOICE.</span><span>CHANGE YOUR</span><span class="world">WORLD.</span></h1>
+          <p class="hero-description">A community for curious minds, confident speakers, creative thinkers, and everyone who believes that words can open doors.</p>
+          <div class="hero-actions"><a class="button button-primary" href="#about">Explore Our Club <span class="button-arrow" aria-hidden="true">↘</span></a><a class="button button-outline" href="#contact">Become a Member <span class="button-arrow" aria-hidden="true">↗</span></a></div>
+          <div class="hero-note"><span class="note-dot" aria-hidden="true"></span><strong>Curiosity looks good on you.</strong> Come as you are.</div>
+        </div>
+        <div class="hero-art" aria-label="Students sharing ideas together">
+          <div class="hero-photo"><img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=1100&q=85" alt="A group of friends gathered together outdoors" fetchpriority="high"><div class="image-caption">GOOD PEOPLE. BIG IDEAS.<span>A little room to find your voice.</span></div></div>
+          <span class="bubble bubble-hello">HELLO!</span><span class="bubble bubble-ideas">IDEAS</span><span class="bubble bubble-create">CREATE</span>
+        </div>
+      </div>
+      <div class="container hero-stats" aria-label="Club highlights">
+        <div class="stat"><strong data-count="100" data-suffix="+">0</strong><span>Conversations</span></div>
+        <div class="stat"><strong data-count="20" data-suffix="+">0</strong><span>Events</span></div>
+        <div class="stat"><strong class="stat-word">∞</strong><span>Ideas</span></div>
+      </div>
+    </section>
+
+    <!-- About our club -->
+    <section class="about" id="about" aria-labelledby="about-title">
+      <div class="container">
+        <div class="about-layout reveal"><div><p class="eyebrow">A PLACE TO BEGIN</p><h2 class="section-heading" id="about-title">WE BELIEVE EVERY VOICE MATTERS.</h2></div><p class="section-intro">The English Society is a community where students develop communication skills, build confidence, share ideas, and discover the power of English beyond textbooks.</p></div>
+        <div class="feature-grid">
+          <article class="feature reveal"><div class="feature-icon" aria-hidden="true">✳</div><h3>Confidence</h3><p>Find your voice and express your ideas without hesitation. Progress starts with a first hello.</p></article>
+          <article class="feature reveal"><div class="feature-icon" aria-hidden="true">↗</div><h3>Communication</h3><p>Improve speaking, listening, writing, and presentation skills in ways that feel natural.</p></article>
+          <article class="feature reveal"><div class="feature-icon" aria-hidden="true">♡</div><h3>Community</h3><p>Meet new people, exchange ideas, and grow together in a welcoming space.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Activities -->
+    <section class="activities" id="activities" aria-labelledby="activities-title">
+      <div class="container">
+        <div class="section-top reveal"><div><p class="eyebrow">MAKE ENGLISH YOURS</p><h2 class="section-heading" id="activities-title">LEARN IT. SPEAK IT. LIVE IT.</h2></div><p class="section-intro">Try something new, find your people, and learn by doing. There is more than one way to find your voice.</p></div>
+        <div class="activity-grid">
+          <article class="activity-card reveal"><span class="activity-icon" aria-hidden="true">◉</span><span class="activity-number">01</span><h3>Public Speaking</h3><p>Build confidence through speeches, presentations, and friendly practice.</p></article>
+          <article class="activity-card reveal"><span class="activity-icon" aria-hidden="true">⚖</span><span class="activity-number">02</span><h3>Debate Club</h3><p>Challenge perspectives, listen closely, and develop critical thinking.</p></article>
+          <article class="activity-card reveal"><span class="activity-icon" aria-hidden="true">☏</span><span class="activity-number">03</span><h3>English Conversations</h3><p>Practice real-life communication in a relaxed, friendly environment.</p></article>
+          <article class="activity-card reveal"><span class="activity-icon" aria-hidden="true">✎</span><span class="activity-number">04</span><h3>Creative Writing</h3><p>Explore storytelling, poetry, articles, and wherever imagination leads.</p></article>
+          <article class="activity-card reveal"><span class="activity-icon" aria-hidden="true">✧</span><span class="activity-number">05</span><h3>Vocabulary Challenges</h3><p>Discover new words through playful competitions, puzzles, and games.</p></article>
+          <article class="activity-card reveal"><span class="activity-icon" aria-hidden="true">▻</span><span class="activity-number">06</span><h3>Movie &amp; Literature</h3><p>Explore English through films, books, and conversations that stay with you.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Upcoming events -->
+    <section class="events" id="events" aria-labelledby="events-title">
+      <div class="container">
+        <div class="section-top reveal"><div><p class="eyebrow">SAVE YOURSELF A SEAT</p><h2 class="section-heading" id="events-title">WHAT'S HAPPENING NEXT?</h2></div><p class="section-intro">A few good reasons to put your phone down, show up, and meet someone new.</p></div>
+        <div class="event-grid">
+          <article class="event-card reveal">
+            <div class="event-cover"><img src="https://images.unsplash.com/photo-1475721027785-f74eccf877e2?auto=format&fit=crop&w=760&q=80" alt="Speaker addressing an audience at an event" loading="lazy"><div class="event-date"><strong>12</strong><span>Nov*</span></div><div class="event-cover-label">THOUGHTS WORTH SHARING</div></div>
+            <div class="event-body"><h3>The Great Debate</h3><div class="event-meta"><span>◷ 3:00 PM</span><span>⌖ Campus Hall*</span></div><p>Two sides, one lively topic, and plenty of room for a new perspective.</p><button class="event-action" type="button" data-event="The Great Debate">Register interest <span aria-hidden="true">↗</span></button></div>
+          </article>
+          <article class="event-card reveal">
+            <div class="event-cover"><img src="https://images.unsplash.com/photo-1511632765486-a01980e01a18?auto=format&fit=crop&w=760&q=80" alt="Friends enjoying a relaxed outdoor gathering" loading="lazy"><div class="event-date"><strong>19</strong><span>Nov*</span></div><div class="event-cover-label">TAKE A BREATH. TAKE THE MIC.</div></div>
+            <div class="event-body"><h3>Speak Without Fear</h3><div class="event-meta"><span>◷ 2:00 PM</span><span>⌖ Student Centre*</span></div><p>A supportive workshop for taking the nerves out of speaking up.</p><button class="event-action" type="button" data-event="Speak Without Fear">Register interest <span aria-hidden="true">↗</span></button></div>
+          </article>
+          <article class="event-card reveal">
+            <div class="event-cover"><img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=760&q=80" alt="Students collaborating around a table" loading="lazy"><div class="event-date"><strong>26</strong><span>Nov*</span></div><div class="event-cover-label">A PLAYGROUND FOR WORD PEOPLE</div></div>
+            <div class="event-body"><h3>Word Wizards Challenge</h3><div class="event-meta"><span>◷ 4:00 PM</span><span>⌖ Library Lounge*</span></div><p>Team up, stretch your vocabulary, and find out where the words take you.</p><button class="event-action" type="button" data-event="Word Wizards Challenge">Register interest <span aria-hidden="true">↗</span></button></div>
+          </article>
+          <article class="event-card reveal">
+            <div class="event-cover"><img src="https://images.unsplash.com/photo-1516280440614-37939bbacd81?auto=format&fit=crop&w=760&q=80" alt="Singer performing on stage at an open mic" loading="lazy"><div class="event-date"><strong>03</strong><span>Dec*</span></div><div class="event-cover-label">A NIGHT FOR EVERY KIND OF VOICE</div></div>
+            <div class="event-body"><h3>Open Mic Evening</h3><div class="event-meta"><span>◷ 5:30 PM</span><span>⌖ Arts Studio*</span></div><p>Poetry, stories, songs, unfinished ideas. The mic is yours.</p><button class="event-action" type="button" data-event="Open Mic Evening">Register interest <span aria-hidden="true">↗</span></button></div>
+          </article>
+          <article class="event-card reveal">
+            <div class="event-cover"><img src="https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&w=760&q=80" alt="Rows of seats in a cinema" loading="lazy"><div class="event-date"><strong>10</strong><span>Dec*</span></div><div class="event-cover-label">ONE FILM. A LOT TO TALK ABOUT.</div></div>
+            <div class="event-body"><h3>English Movie Night</h3><div class="event-meta"><span>◷ 6:00 PM</span><span>⌖ Media Room*</span></div><p>Watch together, then stay for a low-key discussion and fresh opinions.</p><button class="event-action" type="button" data-event="English Movie Night">Register interest <span aria-hidden="true">↗</span></button></div>
+          </article>
+        </div>
+        <p class="editable-note">*Sample dates and locations are editable placeholders. Confirm details with your club before publishing.</p>
+      </div>
+    </section>
+
+    <!-- Why join -->
+    <section class="membership" aria-labelledby="membership-title">
+      <div class="container membership-layout">
+        <div class="reveal"><p class="eyebrow">GOOD THINGS GROW HERE</p><h2 class="section-heading" id="membership-title">YOUR ENGLISH JOURNEY STARTS HERE.</h2><p class="section-intro">Bring your curiosity. Leave with a few new friends, a little more confidence, and a story to tell.</p></div>
+        <div class="reveal"><ul class="benefit-list"><li>Improve communication skills</li><li>Build public speaking confidence</li><li>Make meaningful friendships</li><li>Join exciting activities</li><li>Develop leadership skills</li><li>Discover new opportunities</li></ul><a class="button button-dark" href="#contact">Become a Member <span class="button-arrow" aria-hidden="true">↗</span></a></div>
+      </div>
+    </section>
+
+    <!-- Meet the team -->
+    <section class="team" id="team" aria-labelledby="team-title">
+      <div class="container">
+        <div class="section-top reveal"><div><p class="eyebrow">NICE TO MEET YOU</p><h2 class="section-heading" id="team-title">THE PEOPLE BEHIND THE VOICES.</h2></div><p class="section-intro">A few of the people who make this community feel a little more like home.</p></div>
+        <div class="team-grid">
+          <article class="team-card reveal"><div class="team-photo"><img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=640&q=80" alt="Portrait placeholder for club president" loading="lazy"><span class="team-role">Club President</span></div><div class="team-info"><h3>Your Name Here</h3><p>Believes a good conversation can start anywhere.</p></div></article>
+          <article class="team-card reveal"><div class="team-photo"><img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=640&q=80" alt="Portrait placeholder for vice president" loading="lazy"><span class="team-role">Vice President</span></div><div class="team-info"><h3>Your Name Here</h3><p>Helping big ideas find their next step.</p></div></article>
+          <article class="team-card reveal"><div class="team-photo"><img src="https://images.unsplash.com/photo-1531123897727-8f129e1688ce?auto=format&fit=crop&w=640&q=80" alt="Portrait placeholder for general secretary" loading="lazy"><span class="team-role">General Secretary</span></div><div class="team-info"><h3>Your Name Here</h3><p>Keeps the details moving and the door open.</p></div></article>
+          <article class="team-card reveal"><div class="team-photo"><img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=640&q=80" alt="Portrait placeholder for event coordinator" loading="lazy"><span class="team-role">Event Coordinator</span></div><div class="team-info"><h3>Your Name Here</h3><p>Turns "we should do that" into a date and a place.</p></div></article>
+          <article class="team-card reveal"><div class="team-photo"><img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=640&q=80" alt="Portrait placeholder for public relations officer" loading="lazy"><span class="team-role">Public Relations</span></div><div class="team-info"><h3>Your Name Here</h3><p>Sharing the good things happening in our community.</p></div></article>
+          <article class="team-card reveal"><div class="team-photo"><img src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?auto=format&fit=crop&w=640&q=80" alt="Portrait placeholder for executive member" loading="lazy"><span class="team-role">Executive Member</span></div><div class="team-info"><h3>Your Name Here</h3><p>Bringing fresh energy to every conversation.</p></div></article>
+        </div>
+        <p class="team-placeholder-note">Team portraits, names, and introductions are placeholders. Replace them with approved club information.</p>
+      </div>
+    </section>
+
+    <!-- Gallery -->
+    <section class="gallery" id="gallery" aria-labelledby="gallery-title">
+      <div class="container">
+        <div class="section-top reveal"><div><p class="eyebrow">LITTLE MOMENTS, BIG MEMORIES</p><h2 class="section-heading" id="gallery-title">MEMORIES, MOMENTS &amp; MEANINGFUL CONNECTIONS.</h2></div><p class="section-intro">A glimpse of the conversations, courage, and community that make it all worthwhile.</p></div>
+        <div class="gallery-grid">
+          <button class="gallery-item reveal" type="button" data-full="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=1600&q=90" data-caption="Good company and even better conversations"><img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=850&q=78" alt="Friends talking together outdoors" loading="lazy"><span class="gallery-caption">Club meetings</span></button>
+          <button class="gallery-item reveal" type="button" data-full="https://images.unsplash.com/photo-1475721027785-f74eccf877e2?auto=format&fit=crop&w=1600&q=90" data-caption="Finding the confidence to take the mic"><img src="https://images.unsplash.com/photo-1475721027785-f74eccf877e2?auto=format&fit=crop&w=700&q=78" alt="Speaker sharing an idea with an audience" loading="lazy"><span class="gallery-caption">Public speaking</span></button>
+          <button class="gallery-item reveal" type="button" data-full="https://images.unsplash.com/photo-1528605248644-14dd04022da1?auto=format&fit=crop&w=1600&q=90" data-caption="Good food is an excellent conversation starter"><img src="https://images.unsplash.com/photo-1528605248644-14dd04022da1?auto=format&fit=crop&w=700&q=78" alt="People sharing a meal around a table" loading="lazy"><span class="gallery-caption">Time together</span></button>
+          <button class="gallery-item reveal" type="button" data-full="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&w=1600&q=90" data-caption="Curiosity is always welcome in the room"><img src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&w=1100&q=78" alt="Students learning together in a classroom" loading="lazy"><span class="gallery-caption">Ideas in motion</span></button>
+          <button class="gallery-item reveal" type="button" data-full="https://images.unsplash.com/photo-1511632765486-a01980e01a18?auto=format&fit=crop&w=1600&q=90" data-caption="A community that makes room for everyone"><img src="https://images.unsplash.com/photo-1511632765486-a01980e01a18?auto=format&fit=crop&w=700&q=78" alt="Friends enjoying time outside together" loading="lazy"><span class="gallery-caption">The people</span></button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials" aria-labelledby="testimonials-title">
+      <div class="container">
+        <div class="section-top reveal"><div><p class="eyebrow">A LITTLE ENCOURAGEMENT</p><h2 class="section-heading" id="testimonials-title">REAL PEOPLE. REAL CONFIDENCE.</h2></div><p class="section-intro">A good community makes it easier to try, learn, and find your own way of saying things.</p></div>
+        <div class="quote-grid">
+          <article class="quote-card reveal"><div class="quote-mark" aria-hidden="true">“</div><blockquote>This is sample copy. Replace it with a real, approved member reflection before publishing.</blockquote><div class="quote-person"><span class="quote-avatar" aria-hidden="true">S</span><div><strong>Student Name</strong><span>Member placeholder</span></div></div></article>
+          <article class="quote-card reveal"><div class="quote-mark" aria-hidden="true">“</div><blockquote>Use this space for an authentic story about finding confidence and community.</blockquote><div class="quote-person"><span class="quote-avatar" aria-hidden="true">A</span><div><strong>Student Name</strong><span>Member placeholder</span></div></div></article>
+          <article class="quote-card reveal"><div class="quote-mark" aria-hidden="true">“</div><blockquote>Add a genuine member testimonial here, with their permission and preferred name.</blockquote><div class="quote-person"><span class="quote-avatar" aria-hidden="true">M</span><div><strong>Student Name</strong><span>Member placeholder</span></div></div></article>
+        </div>
+        <p class="sample-label">Sample testimonial layouts only. These are not real member testimonials; replace them with consented feedback.</p>
+      </div>
+    </section>
+
+    <!-- Contact and membership -->
+    <section class="contact" id="contact" aria-labelledby="contact-title">
+      <div class="container contact-layout">
+        <div class="reveal"><p class="eyebrow">WE'D LOVE TO HEAR FROM YOU</p><h2 class="section-heading contact-title" id="contact-title">READY TO FIND YOUR VOICE?</h2><p class="section-intro">Curious about joining? Send us a note. You don't need to have everything figured out before you say hello.</p>
+          <dl class="contact-info">
+            <div class="contact-row"><dt>Email</dt><dd><a href="mailto:englishsociety@example.edu">englishsociety@example.edu</a></dd></div>
+            <div class="contact-row"><dt>Find us</dt><dd>Your University, Student Centre*</dd></div>
+            <div class="contact-row"><dt>Instagram</dt><dd><a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer">@theenglishsociety*</a></dd></div>
+            <div class="contact-row"><dt>Facebook</dt><dd><a href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer">The English Society*</a></dd></div>
+          </dl>
+          <p class="editable-note">*Contact details are placeholders. Update them before publishing.</p>
+        </div>
+        <form class="contact-form reveal" id="contact-form">
+          <div class="field"><label for="full-name">Full name</label><input id="full-name" name="name" type="text" autocomplete="name" placeholder="Your name" minlength="2" maxlength="100" required></div>
+          <div class="field"><label for="email">Email address</label><input id="email" name="email" type="email" autocomplete="email" placeholder="you@example.com" maxlength="254" required></div>
+          <div class="field field-full"><label for="department">Department</label><select id="department" name="department" required><option value="" disabled selected>Select your department</option><option>Arts &amp; Humanities</option><option>Business</option><option>Engineering &amp; Technology</option><option>Health Sciences</option><option>Science</option><option>Social Sciences</option><option>Other</option></select></div>
+          <div class="field field-full"><label for="message">Your message</label><textarea id="message" name="message" placeholder="Tell us what you're curious about..." minlength="5" maxlength="2000" required></textarea></div>
+          <div class="form-bottom"><button class="button button-primary" type="submit">Join the Club <span class="button-arrow" aria-hidden="true">↗</span></button><p class="form-note">No backend is connected. Your email app will open with a draft; nothing is sent or saved by this page.</p></div>
+          <p class="form-status" id="form-status" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-main">
+        <div class="footer-brand-col"><a class="brand" href="#home" aria-label="The English Society home"><span class="brand-mark" aria-hidden="true">E</span><span class="brand-name">THE ENGLISH SOCIETY<span>SPEAK · CONNECT · INSPIRE</span></span></a><p class="footer-about">A community for curious minds, confident speakers, and anyone ready to connect through the power of words.</p><p class="footer-tagline">WORDS CONNECT US. IDEAS DEFINE US.</p></div>
+        <div class="footer-col"><h2>Explore</h2><div class="footer-links"><a href="#about">About</a><a href="#activities">Activities</a><a href="#events">Events</a><a href="#team">Our team</a><a href="#gallery">Gallery</a><a href="#contact">Join us</a></div></div>
+        <div class="footer-col footer-contact"><h2>Say hello</h2><p><a href="mailto:englishsociety@example.edu">englishsociety@example.edu</a></p><p>Your University, Student Centre*</p><div class="social-links"><a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">ig</a><a href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer" aria-label="Facebook">fb</a><a href="mailto:englishsociety@example.edu" aria-label="Email the English Society">@</a></div></div>
+      </div>
+      <div class="footer-bottom"><span>© <span id="current-year"></span> The English Society. All rights reserved.</span><span>*Replace sample details before publishing.</span></div>
+    </div>
+  </footer>
+
+  <button class="back-to-top" id="back-to-top" type="button" aria-label="Back to top">↑</button>
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Gallery image" aria-hidden="true"><button class="overlay-close" type="button" aria-label="Close image">×</button><figure><img src="" alt=""><figcaption></figcaption></figure></div>
+  <div class="event-dialog" id="event-dialog" role="dialog" aria-modal="true" aria-labelledby="dialog-title" aria-describedby="dialog-description" aria-hidden="true"><div class="dialog-panel"><button class="overlay-close" type="button" aria-label="Close event details">×</button><p class="eyebrow">COME JOIN US</p><h2 id="dialog-title">Event title</h2><p id="dialog-description">We'd love to see you there. Event details below are sample placeholders.</p><div class="dialog-details" id="dialog-details"></div><button class="button button-primary" id="event-interest" type="button">I'm interested <span class="button-arrow" aria-hidden="true">↗</span></button><p class="dialog-note">This adds the event to your contact message. Your email app will open so you can send your interest.</p></div></div>
+
+  <script>
+    // Mobile navigation
+    const menuToggle = document.querySelector('.menu-toggle');
+    const navLinks = document.querySelector('.nav-links');
+    function closeMenu() {
+      menuToggle.setAttribute('aria-expanded', 'false');
+      menuToggle.setAttribute('aria-label', 'Open navigation menu');
+      navLinks.classList.remove('open');
+    }
+    menuToggle.addEventListener('click', () => {
+      const isOpen = menuToggle.getAttribute('aria-expanded') === 'true';
+      menuToggle.setAttribute('aria-expanded', String(!isOpen));
+      menuToggle.setAttribute('aria-label', isOpen ? 'Open navigation menu' : 'Close navigation menu');
+      navLinks.classList.toggle('open', !isOpen);
+    });
+    navLinks.querySelectorAll('a').forEach((link) => link.addEventListener('click', closeMenu));
+
+    // Reveal sections as they enter the viewport
+    const revealItems = document.querySelectorAll('.reveal');
+    if ('IntersectionObserver' in window) {
+      const revealObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12 });
+      revealItems.forEach((item) => revealObserver.observe(item));
+    } else {
+      revealItems.forEach((item) => item.classList.add('is-visible'));
+    }
+
+    // Count up the editable club stats once
+    const counters = document.querySelectorAll('[data-count]');
+    function animateCounter(counter) {
+      const target = Number(counter.dataset.count);
+      const suffix = counter.dataset.suffix || '';
+      const start = performance.now();
+      const duration = 1100;
+      function update(now) {
+        const progress = Math.min((now - start) / duration, 1);
+        const eased = 1 - Math.pow(1 - progress, 3);
+        counter.textContent = `${Math.round(target * eased)}${suffix}`;
+        if (progress < 1) requestAnimationFrame(update);
+      }
+      requestAnimationFrame(update);
+    }
+    if ('IntersectionObserver' in window) {
+      const counterObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            animateCounter(entry.target);
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.7 });
+      counters.forEach((counter) => counterObserver.observe(counter));
+    } else {
+      counters.forEach((counter) => { counter.textContent = `${counter.dataset.count}${counter.dataset.suffix || ''}`; });
+    }
+
+    // Active section navigation and back-to-top visibility
+    const sectionLinks = [...document.querySelectorAll('.nav-links a[href^="#"]')].filter((link) => link.hash !== '#contact' || document.querySelector(link.hash));
+    const trackedSections = [...document.querySelectorAll('main section[id]')];
+    const backToTop = document.querySelector('#back-to-top');
+    function updateScrollUI() {
+      backToTop.classList.toggle('visible', window.scrollY > 560);
+      let activeId = 'home';
+      trackedSections.forEach((section) => {
+        if (section.getBoundingClientRect().top <= 130) activeId = section.id;
+      });
+      sectionLinks.forEach((link) => {
+        if (link.hash === `#${activeId}`) link.classList.add('active');
+        else link.classList.remove('active');
+      });
+    }
+    window.addEventListener('scroll', updateScrollUI, { passive: true });
+    updateScrollUI();
+    backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+    document.querySelector('#current-year').textContent = new Date().getFullYear();
+
+    // Gallery lightbox
+    const lightbox = document.querySelector('#lightbox');
+    const lightboxImage = lightbox.querySelector('img');
+    const lightboxCaption = lightbox.querySelector('figcaption');
+    let lastFocusedElement = null;
+    function openLightbox(item) {
+      lastFocusedElement = item;
+      lightboxImage.src = item.dataset.full;
+      lightboxImage.alt = item.querySelector('img').alt;
+      lightboxCaption.textContent = item.dataset.caption;
+      lightbox.classList.add('open');
+      lightbox.setAttribute('aria-hidden', 'false');
+      document.body.classList.add('locked');
+      lightbox.querySelector('.overlay-close').focus();
+    }
+    function closeLightbox() {
+      lightbox.classList.remove('open');
+      lightbox.setAttribute('aria-hidden', 'true');
+      document.body.classList.remove('locked');
+      lightboxImage.src = '';
+      if (lastFocusedElement) lastFocusedElement.focus();
+    }
+    document.querySelectorAll('.gallery-item').forEach((item) => item.addEventListener('click', () => openLightbox(item)));
+    lightbox.querySelector('.overlay-close').addEventListener('click', closeLightbox);
+    lightbox.addEventListener('click', (event) => { if (event.target === lightbox) closeLightbox(); });
+
+    // Event details and RSVP handoff
+    const eventDialog = document.querySelector('#event-dialog');
+    const contactMessage = document.querySelector('#message');
+    const formStatus = document.querySelector('#form-status');
+    let selectedEvent = null;
+    function openEventDialog(button) {
+      const card = button.closest('.event-card');
+      selectedEvent = button.dataset.event;
+      lastFocusedElement = button;
+      eventDialog.querySelector('#dialog-title').textContent = selectedEvent;
+      const meta = [...card.querySelectorAll('.event-meta span')].map((item) => item.textContent.trim()).join(' · ');
+      eventDialog.querySelector('#dialog-details').textContent = `${card.querySelector('.event-date').textContent.replace(/\s+/g, ' ').trim()} · ${meta}`;
+      eventDialog.classList.add('open');
+      eventDialog.setAttribute('aria-hidden', 'false');
+      document.body.classList.add('locked');
+      eventDialog.querySelector('.overlay-close').focus();
+    }
+    function closeEventDialog() {
+      eventDialog.classList.remove('open');
+      eventDialog.setAttribute('aria-hidden', 'true');
+      document.body.classList.remove('locked');
+      if (lastFocusedElement) lastFocusedElement.focus();
+    }
+    document.querySelectorAll('.event-action').forEach((button) => button.addEventListener('click', () => openEventDialog(button)));
+    eventDialog.querySelector('.overlay-close').addEventListener('click', closeEventDialog);
+    eventDialog.addEventListener('click', (event) => { if (event.target === eventDialog) closeEventDialog(); });
+    eventDialog.querySelector('#event-interest').addEventListener('click', () => {
+      contactMessage.value = `I'm interested in ${selectedEvent}. Please let me know more.`;
+      closeEventDialog();
+      document.querySelector('#contact').scrollIntoView({ behavior: 'smooth' });
+      window.setTimeout(() => document.querySelector('#full-name').focus({ preventScroll: true }), 450);
+    });
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') {
+        if (lightbox.classList.contains('open')) closeLightbox();
+        if (eventDialog.classList.contains('open')) closeEventDialog();
+      }
+    });
+
+    // Validate locally, then prepare an email rather than claiming to submit to a server
+    const contactForm = document.querySelector('#contact-form');
+    contactForm.addEventListener('input', () => { formStatus.textContent = ''; });
+    contactForm.addEventListener('submit', (event) => {
+      event.preventDefault();
+      if (!contactForm.reportValidity()) return;
+      const formData = new FormData(contactForm);
+      const subject = encodeURIComponent(`English Society membership inquiry from ${formData.get('name')}`);
+      const body = encodeURIComponent(`Name: ${formData.get('name')}\nEmail: ${formData.get('email')}\nDepartment: ${formData.get('department')}\n\n${formData.get('message')}`);
+      formStatus.textContent = 'Your email app should open with a draft. The message is not sent or stored by this page.';
+      window.location.href = `mailto:englishsociety@example.edu?subject=${subject}&body=${body}`;
+    });
+  </script>
+</body>
+</html>
